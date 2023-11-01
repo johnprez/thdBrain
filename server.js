@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+const port =  3000;
 
 //handling CORS
 app.use((req,res,next)=> {
@@ -16,6 +18,16 @@ app.get('/api/message', (req,res)=>{
         message: ' Hello, this is the THD express server for BRAIN'
     });
 });
+
+
+
+app.use(express.static('dist/client/'));
+
+app.get('*', function(req,res) {
+    res.sendFile(path.resolve('dist/client/index.html'));
+});
+
+
 
 app.listen(3000, ()=>{
    console.log('Server is listening on port 3000'); 
